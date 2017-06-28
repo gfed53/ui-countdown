@@ -8,26 +8,31 @@ $(function(){
 
 	console.log(end);
 
-	var current = moment();
-
-	var diffDays = end.diff(current, 'days'),
-		diffHours = end.diff(current, 'hours'),
-		diffMins = end.diff(current, 'minutes'),
-		diffSecs = end.diff(current, 'seconds');
-
-	// console.log(diff);
-
 	function init(){
-		setInterval(()=>{
-			current = moment();
-			diffDays = end.diff(current, 'days'),
-			diffHours = end.diff(current, 'hours'),
-			diffMins = end.diff(current, 'minutes'),
-			diffSecs = end.diff(current, 'seconds');
+		var timeInterval = setInterval(()=>{
+			var t = calcTimeRemaining(end);
+
+
 			$('.test').html(`
-				${diffDays} days. ${diffHours} hours.
+				${t.days} days. ${t.hours} hours. ${t.minutes} minutes. ${t.seconds} seconds..
 				`);
 		}, 1000);
+	}
+
+	function calcTimeRemaining(endTime){
+		var diff = endTime.diff(moment(), true),
+			diffDays = Math.floor((diff/(1000*60*60*24))),
+			diffHours = Math.floor((diff/(1000*60*60)) % 24),
+			diffMins = Math.floor((diff/1000/60) % 60),
+			diffSecs = Math.floor((diff/1000) % 60);
+
+		return {
+			'total': diff,
+			'days': diffDays,
+			'hours': diffHours,
+			'minutes': diffMins,
+			'seconds': diffSecs
+		};
 	}
 
 	init();
