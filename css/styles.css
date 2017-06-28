@@ -7,3 +7,15 @@
 *:before, *:after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
+
+html {
+  min-height: 100%;
+  background: none; }
+
+body {
+  min-height: 100%;
+  background: url("../images/hl-bg.jpg") no-repeat center center;
+  background-size: cover; }
+
+.countdown {
+  color: white; }
