@@ -73,6 +73,17 @@ $(function(){
 		});
 	}
 
+	//Create interval that blurs and sharpens periodically
+	function blurFull(){
+		let blurInterval = setInterval(()=>{
+			//
+		}, 5000);
+	}
+
+	function blurEffect(){
+		
+	}
+
 	init();
 
 	console.log(typeof diff);
