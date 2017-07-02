@@ -11,14 +11,22 @@ $(function(){
 	function init(){
 		let timeInterval = setInterval(()=>{
 			let t = calcTimeRemaining(end);
-			$('.countdown').html(`
-				${t.days} days. ${t.hours} hours. ${t.minutes} minutes. ${t.seconds} seconds..
-				`);
+			// $('.countdown').html(`
+			// 	<span class="cd-days">${t.days} days.</span> <span>${t.hours} hours.</span> <span>${t.minutes} minutes.</span> <span>${t.seconds} seconds..</span>
+			// 	`);
+
+			$('.countdown span:nth-child(1)').html(`${t.days} days.`);
+			$('.countdown span:nth-child(2)').html(`${t.hours} hours.`);
+			$('.countdown span:nth-child(3)').html(`${t.minutes} minutes.`);
+			$('.countdown span:nth-child(4)').html(`${t.seconds} seconds.`);
+
 			
 			if(t.total <= 0){
 				clearInterval(timeInterval);
 			}
 		}, 1000);
+
+		display();
 	}
 
 	function calcTimeRemaining(endTime){
@@ -35,6 +43,34 @@ $(function(){
 			'minutes': diffMins,
 			'seconds': diffSecs
 		};
+	}
+
+	function display(){
+		//Refactor into loop?
+		$('.countdown span:nth-child(1)').velocity({
+			opacity: 1
+		},{
+			duration: 50,
+			delay: 1000
+		});
+		$('.countdown span:nth-child(2)').velocity({
+			opacity: 1
+		},{
+			duration: 50,
+			delay: 2000
+		});
+		$('.countdown span:nth-child(3)').velocity({
+			opacity: 1
+		},{
+			duration: 50,
+			delay: 3000
+		});
+		$('.countdown span:nth-child(4)').velocity({
+			opacity: 1
+		},{
+			duration: 50,
+			delay: 4000
+		});
 	}
 
 	init();

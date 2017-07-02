@@ -45,3 +45,6 @@ body {
 @media screen and (min-width: 768px) {
   .countdown {
     font-size: 4em; } }
+
+.countdown span {
+  opacity: 0; }
