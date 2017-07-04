@@ -3,10 +3,13 @@
 $(function(){
 	
 	// .format('MMMM Do YYYY, h:mm:ss a')
+	let $main = $('#main');
 	
 	let end = moment('2017-12-25','YYYY-MM-DD');
 
 	console.log(end);
+
+	let durations = [2000,3000,4000,5000,6000,7000];
 
 	function init(){
 		let timeInterval = setInterval(()=>{
@@ -27,6 +30,8 @@ $(function(){
 		}, 1000);
 
 		display();
+
+		blurLoop();
 	}
 
 	function calcTimeRemaining(endTime){
@@ -74,13 +79,40 @@ $(function(){
 	}
 
 	//Create interval that blurs and sharpens periodically
-	function blurFull(){
-		let blurInterval = setInterval(()=>{
-			//
-		}, 5000);
+
+	let isLooping = false;
+
+	function blurLoop(){
+		console.log('blurLoop start');
+		let interval = setInterval(()=>{
+			if(!isLooping){
+				console.log('blurLoop inner execution');
+				let length = durations[Math.floor(Math.random()*durations.length)];
+				blurRound(length);
+			}
+		}, 1000);
 	}
 
-	function blurEffect(){
+	function blurRound(length){
+		console.log('blurRound start. length:',length);
+		isLooping = true;
+		let blurOuter = setTimeout(()=>{
+			console.log('blurOuter timeout end');
+			blurEffect(()=>{
+				clearTimeout(blurOuter);
+				isLooping = false;
+			});
+		}, length);
+	}
+
+	function blurEffect(cb){
+		console.log('blurEffect start');
+		$main.addClass('blur');
+		let blurInner = setTimeout(()=>{
+			$main.removeClass('blur');
+			clearTimeout(blurInner);
+			cb();
+		}, 1000);
 		
 	}
 
